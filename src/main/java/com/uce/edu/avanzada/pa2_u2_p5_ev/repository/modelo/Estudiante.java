@@ -20,6 +20,19 @@ public class Estudiante {
     private String cedula;
     @Column(name = "estu_fecha_nacimiento")
     private LocalDateTime fechaNacimiento;
+    //toString
+
+
+    @Override
+    public String toString() {
+        return "Estudiante{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", cedula='" + cedula + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                '}';
+    }
 
     //Getters and Setters
     public LocalDateTime getFechaNacimiento() {
