@@ -8,25 +8,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CiudadanoServiceImpl implements ICiudadanoService{
+public class CiudadanoServiceImpl implements ICiudadanoService {
     @Autowired
     private ICiudadanoRepository iCiudadanoRepository;
+
     @Override
     public Ciudadano buscar(Integer id) {
         return this.iCiudadanoRepository.seleccionar(id);
     }
+
     @Override
     public void guardar(Ciudadano ciudadano) {
         this.iCiudadanoRepository.insertar(ciudadano);
     }
-//
-//    @Override
-//    public void actualizar(Ciudadano estudiante) {
-//        this.iCiudadanoRepository.actualizar(estudiante);
-//    }
-//
-//    @Override
-//    public void eliminar(Integer id) {
-//        this.iCiudadanoRepository.eliminar(id);
-//    }
+
+    @Override
+    public void actualizar(Ciudadano estudiante) {
+        this.iCiudadanoRepository.actualizar(estudiante);
+    }
+
+    @Override
+    public void eliminar(Integer id) {
+        this.iCiudadanoRepository.eliminar(id);
+    }
 }

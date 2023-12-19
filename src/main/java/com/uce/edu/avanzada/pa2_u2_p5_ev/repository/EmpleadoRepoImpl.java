@@ -21,17 +21,17 @@ public class EmpleadoRepoImpl implements IEmpleadoRepository{
         this.entityManager.persist(empleado);
     }
 
-//    @Override
-//    public void actualizar(Empleado empleado) {
-//        this.entityManager.merge(empleado);
-//    }
-//
-//    @Override
-//    public void eliminar(Integer id) {
-//        Empleado empleado = this.seleccionar(id);
-//        this.entityManager.remove(
-//        empleado
-//        );
-//    }
+    @Override
+    public void actualizar(Empleado empleado) {
+        this.entityManager.merge(empleado);
+    }
+
+    @Override
+    public void eliminar(Integer id) {
+        Empleado empleado = this.seleccionar(id);
+        this.entityManager.remove(
+        empleado
+        );
+    }
 
 }

@@ -68,5 +68,5 @@ public class Pa2U2P5EvApplication implements CommandLineRunner {
 
 
     }
-    //todo consultar sobre el manejo de transacciones
 }
+    //todo consultar sobre el manejo de transacciones

@@ -8,9 +8,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Transactional
-public class CiudadanoRepoImpl implements ICiudadanoRepository{
+public class CiudadanoRepoImpl implements ICiudadanoRepository {
     @PersistenceContext
     private EntityManager entityManager;
+
     @Override
     public Ciudadano seleccionar(Integer id) {
         return this.entityManager.find(Ciudadano.class, id);
@@ -21,17 +22,15 @@ public class CiudadanoRepoImpl implements ICiudadanoRepository{
         this.entityManager.persist(ciudadano);
     }
 
-//    @Override
-//    public void actualizar(Ciudadano ciudadano) {
-//        this.entityManager.merge(ciudadano);
-//    }
-//
-//    @Override
-//    public void eliminar(Integer id) {
-//        Ciudadano ciudadano = this.seleccionar(id);
-//        this.entityManager.remove(
-//        ciudadano
-//        );
-//    }
+    @Override
+    public void actualizar(Ciudadano ciudadano) {
+        this.entityManager.merge(ciudadano);
+    }
+
+    @Override
+    public void eliminar(Integer id) {
+        Ciudadano ciudadano = this.seleccionar(id);
+        this.entityManager.remove(ciudadano);
+    }
 
 }
