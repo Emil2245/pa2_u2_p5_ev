@@ -1,14 +1,19 @@
 package com.uce.edu.avanzada.pa2_u2_p5_ev;
 
 import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Alumno;
+import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Ciudadano;
+import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Empleado;
 import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Estudiante;
 import com.uce.edu.avanzada.pa2_u2_p5_ev.service.IAlumnoService;
+import com.uce.edu.avanzada.pa2_u2_p5_ev.service.ICiudadanoService;
+import com.uce.edu.avanzada.pa2_u2_p5_ev.service.IEmpleadoService;
 import com.uce.edu.avanzada.pa2_u2_p5_ev.service.IEstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.AbstractList;
 
@@ -16,10 +21,10 @@ import java.util.AbstractList;
 public class Pa2U2P5EvApplication implements CommandLineRunner {
 
     @Autowired
-    private IEstudianteService iEstudianteService;
+    private IEmpleadoService iEmpleadoService;
 
     @Autowired
-    private IAlumnoService iAlumnoService;
+    private ICiudadanoService iCiudadanoService;
 
     public static void main(String[] args) {
         SpringApplication.run(Pa2U2P5EvApplication.class, args);
@@ -27,32 +32,39 @@ public class Pa2U2P5EvApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Estudiante estudiante0 = new Estudiante();
-        estudiante0.setApellido("Verkade");
-        estudiante0.setCedula("159844621");
-        estudiante0.setNombre("Emil");
-        estudiante0.setFechaNacimiento(LocalDateTime.of(
-                2002, 02, 17, 00, 01, 55));
 
-//        this.iEstudianteService.guardar(estudiante0);
-//        Estudiante estudiante1 = this.iEstudianteService.buscar(9);
-//        this.iEstudianteService.buscar(estudiante1.getId());
-//        estudiante1.setNombre("Emiliano");
-//        this.iEstudianteService.actualizar(estudiante1);
+        Ciudadano ciudadano = new Ciudadano();
+        ciudadano.setApellido("Verkade");
+        ciudadano.setNombre("Emil");
 
-//        this.iEstudianteService.eliminar(9);
+        Empleado empleado = new Empleado();
+        empleado.setSalario(new BigDecimal(500));
+        empleado.setFechaIngreso(LocalDateTime.now());
+
+//        iCiudadanoService.guardar(ciudadano);
+
+        System.out.println(
+                this.iCiudadanoService.buscar(1)
+        );
+
+        empleado.setCiudadano(this.iCiudadanoService.buscar(1));
+//        this.iEmpleadoService.guardar(empleado);
+//        System.out.println(
+//                this.iEmpleadoService.buscar(4)
+//        );
 
 
-        Alumno alumno = new Alumno();
-        alumno.setId(5);
-        alumno.setNombre("Juan");
-//        this.iAlumnoService.guardar(alumno);
 
-        Alumno alumno1=this.iAlumnoService.buscar(alumno.getId());
-        alumno1.setNombre("peptito");
-        this.iAlumnoService.actualizar(alumno1);
 
-//        this.iAlumnoService.eliminar(alumno.getId());
+
+
+
+
+
+
+
+
+
 
 
     }
