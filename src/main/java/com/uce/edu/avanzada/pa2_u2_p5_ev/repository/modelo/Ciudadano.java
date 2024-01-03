@@ -14,7 +14,7 @@ public class Ciudadano {
     private String nombre;
     @Column(name = "ciud_apellido")
     private String apellido;
-    @OneToOne(mappedBy = "ciudadano")//nombre del atributo de la otra tabla
+    @OneToOne(mappedBy = "ciudadano",cascade = CascadeType.ALL)//nombre del atributo de la otra tabla
     private Empleado empleado;
 
 

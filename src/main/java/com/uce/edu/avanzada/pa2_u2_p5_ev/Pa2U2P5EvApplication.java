@@ -1,13 +1,13 @@
 package com.uce.edu.avanzada.pa2_u2_p5_ev;
 
-import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Alumno;
 import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Ciudadano;
 import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Empleado;
-import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Estudiante;
-import com.uce.edu.avanzada.pa2_u2_p5_ev.service.IAlumnoService;
+import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Habitacion;
+import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Hotel;
 import com.uce.edu.avanzada.pa2_u2_p5_ev.service.ICiudadanoService;
 import com.uce.edu.avanzada.pa2_u2_p5_ev.service.IEmpleadoService;
-import com.uce.edu.avanzada.pa2_u2_p5_ev.service.IEstudianteService;
+import com.uce.edu.avanzada.pa2_u2_p5_ev.service.IHabitacionService;
+import com.uce.edu.avanzada.pa2_u2_p5_ev.service.IHotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,16 +15,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class Pa2U2P5EvApplication implements CommandLineRunner {
 
     @Autowired
-    private IEmpleadoService iEmpleadoService;
+    private IHotelService iHotelService;
 
     @Autowired
-    private ICiudadanoService iCiudadanoService;
+    private IHabitacionService iHabitacionService;
 
     public static void main(String[] args) {
         SpringApplication.run(Pa2U2P5EvApplication.class, args);
@@ -32,26 +33,36 @@ public class Pa2U2P5EvApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        Hotel hotel = new Hotel();
+        hotel.setNombre("Hotel del Mar");
+        hotel.setDireccion("a la orillita norte");
 
-        Ciudadano ciudadano = new Ciudadano();
-        ciudadano.setApellido("Verkade");
-        ciudadano.setNombre("Emil");
+        Habitacion habitacion1 =new Habitacion();
+        habitacion1.setClase("VIP");
+        habitacion1.setHotel(hotel);
+        habitacion1.setNumero("100");
+        Habitacion habitacion2 = new Habitacion();
+        habitacion2.setClase("Normie");
+        habitacion2.setHotel(hotel);
+        habitacion2.setNumero("101");
+        List<Habitacion> habitaciones = new ArrayList<>();
+        habitaciones.add(habitacion1);
+        habitaciones.add(habitacion2);
 
-        Empleado empleado = new Empleado();
-        empleado.setSalario(new BigDecimal(500));
-        empleado.setFechaIngreso(LocalDateTime.now());
+        hotel.setHabitaciones(habitaciones);
 
-//        iCiudadanoService.guardar(ciudadano);
+        this.iHotelService.guardar(hotel);
 
-        System.out.println(
-                this.iCiudadanoService.buscar(1)
-        );
 
-        empleado.setCiudadano(this.iCiudadanoService.buscar(1));
-//        this.iEmpleadoService.guardar(empleado);
-//        System.out.println(
-//                this.iEmpleadoService.buscar(4)
-//        );
+
+
+
+
+
+
+
+
+
 
 
 
