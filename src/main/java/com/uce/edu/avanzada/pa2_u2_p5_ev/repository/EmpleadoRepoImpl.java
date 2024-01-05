@@ -8,9 +8,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Transactional
-public class EmpleadoRepoImpl implements IEmpleadoRepository{
+public class EmpleadoRepoImpl implements IEmpleadoRepository {
     @PersistenceContext
     private EntityManager entityManager;
+
     @Override
     public Empleado seleccionar(Integer id) {
         return this.entityManager.find(Empleado.class, id);
@@ -28,10 +29,13 @@ public class EmpleadoRepoImpl implements IEmpleadoRepository{
 
     @Override
     public void eliminar(Integer id) {
-        Empleado empleado = this.seleccionar(id);
-        this.entityManager.remove(
-        empleado
-        );
+
+            Empleado empleado = this.seleccionar(id);
+            this.entityManager.remove(
+                    empleado
+            );
+
+        System.out.println("eliminado correctamente...");
     }
 
 }

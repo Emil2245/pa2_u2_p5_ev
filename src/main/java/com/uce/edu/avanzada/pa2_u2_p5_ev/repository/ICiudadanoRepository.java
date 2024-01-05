@@ -7,7 +7,7 @@ public interface ICiudadanoRepository {
 
     void insertar(Ciudadano ciudadano);
 
-    void actualizar(Ciudadano ciudadano);
+    void actualizar(Integer id,Ciudadano ciudadano);
 
     void eliminar(Integer id);
 }

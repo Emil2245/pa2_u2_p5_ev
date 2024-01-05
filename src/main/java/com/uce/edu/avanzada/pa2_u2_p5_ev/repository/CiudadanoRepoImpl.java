@@ -23,14 +23,19 @@ public class CiudadanoRepoImpl implements ICiudadanoRepository {
     }
 
     @Override
-    public void actualizar(Ciudadano ciudadano) {
-        this.entityManager.merge(ciudadano);
+    public void actualizar(Integer id,Ciudadano ciudadano) {
+        Ciudadano ci = this.seleccionar(id);
+        ci =this.entityManager.merge(ciudadano);
+
     }
 
     @Override
     public void eliminar(Integer id) {
-        Ciudadano ciudadano = this.seleccionar(id);
-        this.entityManager.remove(ciudadano);
+
+            Ciudadano ciudadano = this.seleccionar(id);
+            this.entityManager.remove(ciudadano);
+
+        System.out.println("eliminado correctamente...");
     }
 
 }

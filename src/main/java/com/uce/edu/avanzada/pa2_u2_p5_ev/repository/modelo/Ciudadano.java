@@ -14,20 +14,12 @@ public class Ciudadano {
     private String nombre;
     @Column(name = "ciud_apellido")
     private String apellido;
-    @OneToOne(mappedBy = "ciudadano")//nombre del atributo de la otra tabla
+    @OneToOne(mappedBy = "ciudadano",cascade = CascadeType.ALL)//nombre del atributo de la otra tabla
     private Empleado empleado;
 
 
 
     //toString, settters y getters
-
-    public Empleado getEmpleado() {
-        return empleado;
-    }
-
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
-    }
 
     @Override
     public String toString() {
@@ -35,7 +27,16 @@ public class Ciudadano {
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
+                ", empleado=" + empleado +
                 '}';
+    }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
     }
 
     public Integer getId() {

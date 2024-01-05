@@ -23,6 +23,16 @@ public class Empleado {
 
     //Getters and setters
 
+    @Override
+    public String toString() {
+        return "Empleado{" +
+                "id=" + id +
+                ", salario=" + salario +
+                ", fechaIngreso=" + fechaIngreso +
+                ", ciudadano=" + ciudadano +
+                '}';
+    }
+
     public Ciudadano getCiudadano() {
         return ciudadano;
     }

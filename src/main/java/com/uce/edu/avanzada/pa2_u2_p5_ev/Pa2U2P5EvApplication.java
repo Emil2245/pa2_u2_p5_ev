@@ -34,39 +34,35 @@ public class Pa2U2P5EvApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         Ciudadano ciudadano = new Ciudadano();
-        ciudadano.setApellido("Verkade");
-        ciudadano.setNombre("Emil");
+        ciudadano.setApellido("Deber");
+        ciudadano.setNombre("Numero 8");
 
         Empleado empleado = new Empleado();
         empleado.setSalario(new BigDecimal(500));
         empleado.setFechaIngreso(LocalDateTime.now());
 
-//        iCiudadanoService.guardar(ciudadano);
-
-        System.out.println(
-                this.iCiudadanoService.buscar(1)
-        );
-
-        empleado.setCiudadano(this.iCiudadanoService.buscar(1));
+        //Insercion
+//        this.iCiudadanoService.guardar(ciudadano);
+//        empleado.setCiudadano(this.iCiudadanoService.buscar(11));
 //        this.iEmpleadoService.guardar(empleado);
-//        System.out.println(
-//                this.iEmpleadoService.buscar(4)
-//        );
 
+        //Busqueda
+//        this.iCiudadanoService.buscar(11);
 
+        //Actualizacion
+//        Empleado empleado2 = new Empleado();
+//        empleado2.setSalario(new BigDecimal(8880));
+//        empleado=this.iEmpleadoService.buscar(19);
+//        this.iEmpleadoService.actualizar(empleado2);
+//        Ciudadano ciudadano1 =new Ciudadano();
+//        ciudadano1.setApellido("Tarea");
+//        ciudadano1.setNombre("Numero 8");
+//        this.iCiudadanoService.actualizar(11,ciudadano1);
 
-
-
-
-
-
-
-
-
-
-
+        //Eliminar
+        this.iCiudadanoService.eliminar(11);
+        this.iEmpleadoService.eliminar(19);
 
 
     }
 }
-    //todo consultar sobre el manejo de transacciones
