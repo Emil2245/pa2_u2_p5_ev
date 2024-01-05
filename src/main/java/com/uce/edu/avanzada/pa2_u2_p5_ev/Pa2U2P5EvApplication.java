@@ -51,28 +51,41 @@ public class Pa2U2P5EvApplication implements CommandLineRunner {
 
         hotel.setHabitaciones(habitaciones);
 
-        this.iHotelService.guardar(hotel);
+        //Insercion
+        //        this.iHotelService.guardar(hotel);
 
+        //Actualizacion
+//        Hotel hotel1 = new Hotel();
+//        hotel1.setNombre("Hotel Barataso");
+//        hotel1.setDireccion("vecino del otro");
+//        hotel1.setId(2);
+//
+//        Habitacion habitacion3 =new Habitacion();
+//        habitacion3.setClase("Premium");
+//        habitacion3.setHotel(hotel1);
+//        habitacion3.setNumero("200");
+//        habitacion3.setId(3);
+//        Habitacion habitacion4 = new Habitacion();
+//        habitacion4.setClase("Meh...");
+//        habitacion4.setHotel(hotel1);
+//        habitacion4.setNumero("210");
+//        habitacion3.setId(4);
+//        List<Habitacion> habitaciones2 = new ArrayList<>();
+//        habitaciones2.add(habitacion3);
+//        habitaciones2.add(habitacion4);
+//
+//        hotel1.setHabitaciones(habitaciones2);
+//        this.iHotelService.actualizar(hotel1);
 
+        //Busqueda
+//        this.iHabitacionService.buscar(3);
+//        this.iHabitacionService.buscar(4);
+//        this.iHotelService.buscar(2);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //Eliminar
+        this.iHotelService.eliminar(2);
+        this.iHabitacionService.eliminar(3);
+        this.iHabitacionService.eliminar(4);
 
 
 
@@ -80,4 +93,3 @@ public class Pa2U2P5EvApplication implements CommandLineRunner {
 
     }
 }
-    //todo consultar sobre el manejo de transacciones

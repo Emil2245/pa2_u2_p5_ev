@@ -9,23 +9,23 @@ import org.springframework.stereotype.Service;
 public class HotelServiceImpl implements IHotelService{
     @Autowired
     private IHotelRepository iHotelRepository;
-//    @Override
-//    public Hotel buscar(Integer id) {
-//        return this.iHotelRepository.seleccionar(id);
-//    }
+    @Override
+    public Hotel buscar(Integer id) {
+        return this.iHotelRepository.seleccionar(id);
+    }
 
     @Override
     public void guardar(Hotel hotel) {
         this.iHotelRepository.insertar(hotel);
     }
 
-//    @Override
-//    public void actualizar(Hotel hotel) {
-//        this.iHotelRepository.actualizar(hotel);
-//    }
-//
-//    @Override
-//    public void eliminar(Integer id) {
-//        this.iHotelRepository.eliminar(id);
-//    }
+    @Override
+    public void actualizar(Hotel hotel) {
+        this.iHotelRepository.actualizar(hotel);
+    }
+
+    @Override
+    public void eliminar(Integer id) {
+        this.iHotelRepository.eliminar(id);
+    }
 }
