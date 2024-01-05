@@ -23,8 +23,8 @@ public class CiudadanoServiceImpl implements ICiudadanoService {
     }
 
     @Override
-    public void actualizar(Integer id,Ciudadano ciudadano) {
-        this.iCiudadanoRepository.actualizar(id,ciudadano);
+    public void actualizar(Ciudadano ciudadano) {
+        this.iCiudadanoRepository.actualizar(ciudadano);
     }
 
     @Override

@@ -43,7 +43,7 @@ public class Pa2U2P5EvApplication implements CommandLineRunner {
 
         //Insercion
 //        this.iCiudadanoService.guardar(ciudadano);
-//        empleado.setCiudadano(this.iCiudadanoService.buscar(11));
+//        empleado.setCiudadano(this.iCiudadanoService.buscar(14));
 //        this.iEmpleadoService.guardar(empleado);
 
         //Busqueda
@@ -60,8 +60,23 @@ public class Pa2U2P5EvApplication implements CommandLineRunner {
 //        this.iCiudadanoService.actualizar(11,ciudadano1);
 
         //Eliminar
-        this.iCiudadanoService.eliminar(11);
-        this.iEmpleadoService.eliminar(19);
+//        this.iCiudadanoService.eliminar(11);
+//        this.iEmpleadoService.eliminar(19);
+
+        //Actualizar
+        Ciudadano ciudadano2 = new Ciudadano();
+        ciudadano2.setApellido("Tarea");
+        ciudadano2.setNombre("Numero 8 Actualizada");
+        ciudadano2.setId(14);
+        Empleado empleado2 = new Empleado();
+        empleado2.setSalario(new BigDecimal(5000000));
+        empleado2.setFechaIngreso(LocalDateTime.now());
+        empleado2.setId(23);
+        empleado2.setCiudadano(this.iCiudadanoService.buscar(14));
+
+        this.iCiudadanoService.actualizar(ciudadano2);
+        this.iEmpleadoService.actualizar(empleado2);
+
 
 
     }

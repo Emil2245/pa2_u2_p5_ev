@@ -23,9 +23,9 @@ public class CiudadanoRepoImpl implements ICiudadanoRepository {
     }
 
     @Override
-    public void actualizar(Integer id,Ciudadano ciudadano) {
-        Ciudadano ci = this.seleccionar(id);
-        ci =this.entityManager.merge(ciudadano);
+    public void actualizar(Ciudadano ciudadano) {
+
+        this.entityManager.merge(ciudadano);
 
     }
 
