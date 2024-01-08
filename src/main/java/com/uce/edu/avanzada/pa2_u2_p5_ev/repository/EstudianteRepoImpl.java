@@ -7,9 +7,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Transactional
-public class EstudianteRepoImpl implements IEstudianteRepository{
+public class EstudianteRepoImpl implements IEstudianteRepository {
     @PersistenceContext
     private EntityManager entityManager;
+
     @Override
     public Estudiante seleccionar(Integer id) {
         return this.entityManager.find(Estudiante.class, id);
@@ -28,9 +29,7 @@ public class EstudianteRepoImpl implements IEstudianteRepository{
     @Override
     public void eliminar(Integer id) {
         Estudiante estudiante = this.seleccionar(id);
-        this.entityManager.remove(
-        estudiante
-        );
+        this.entityManager.remove(estudiante);
     }
 
 }

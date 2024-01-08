@@ -1,7 +1,6 @@
 package com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo;
 
 import jakarta.persistence.*;
-import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Libro;
 
 import java.util.Set;
 
@@ -17,7 +16,7 @@ public class Autor {
     private String nombre;
     @Column(name = "auto_nacionalidad")
     private String nacionalidad;
-    @ManyToMany(mappedBy = "autores", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "autores", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Libro> libros;
 
     /////////////////////////
@@ -47,7 +46,7 @@ public class Autor {
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", nacionalidad='" + nacionalidad + '\'' +
-                ", libros=" + libros +
+                ", libros=" +  libros.stream().map(Libro::getTitulo).toList() +
                 '}';
     }
 

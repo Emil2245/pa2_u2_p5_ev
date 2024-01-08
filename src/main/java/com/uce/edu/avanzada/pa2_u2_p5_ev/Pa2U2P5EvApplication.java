@@ -2,7 +2,7 @@ package com.uce.edu.avanzada.pa2_u2_p5_ev;
 
 import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Autor;
 import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Libro;
-import com.uce.edu.avanzada.pa2_u2_p5_ev.service.IHabitacionService;
+import com.uce.edu.avanzada.pa2_u2_p5_ev.service.IAutorService;
 import com.uce.edu.avanzada.pa2_u2_p5_ev.service.ILibroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,6 +18,8 @@ public class Pa2U2P5EvApplication implements CommandLineRunner {
 
     @Autowired
     private ILibroService iLibroService;
+    @Autowired
+    private IAutorService iAutorService;
 
     public static void main(String[] args) {
         SpringApplication.run(Pa2U2P5EvApplication.class, args);
@@ -39,7 +41,31 @@ public class Pa2U2P5EvApplication implements CommandLineRunner {
 //        autor1.setLibros(libros);
 //        autor2.setLibros(libros);
 
-        iLibroService.guardar(libro1);
+        this.iLibroService.guardar(libro1);
+
+        //Busqueda
+        System.out.println("--------------------------------");
+//        System.out.println(this.iLibroService.buscar(2));
+        System.out.println("--------------------------------");
+//        System.out.println(this.iAutorService.buscar(3));
+//        System.out.println(this.iAutorService.buscar(4));
+        System.out.println("--------------------------------");
+
+        //Actualizar
+//        Libro libro=this.iLibroService.buscar(2);
+//        libro.setFechaPublicacion(LocalDateTime.of(2002,5,17,12,0));
+//        this.iLibroService.actualizar(libro);
+        Autor autor = this.iAutorService.buscar(5);
+        autor.setNombre("Nuevo Nombre");
+        this.iAutorService.actualizar(autor);
+
+        //Eliminar
+//        this.iLibroService.eliminar(2);
+        this.iAutorService.borrar(5);
+
+
+
+
 
 
     }

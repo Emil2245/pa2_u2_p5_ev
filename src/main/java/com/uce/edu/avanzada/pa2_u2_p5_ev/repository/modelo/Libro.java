@@ -17,7 +17,7 @@ public class Libro {
     private String titulo;
     @Column(name = "libr_fechaPublicacion")
     private LocalDateTime fechaPublicacion;
-    @ManyToMany (cascade = CascadeType.ALL)
+    @ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "autor_libro",
             joinColumns = @JoinColumn(name = "autor_libro_id_libro"),
             inverseJoinColumns = @JoinColumn(name = "autor_libro_id_autor"))
@@ -41,7 +41,7 @@ public class Libro {
                 "id=" + id +
                 ", titulo='" + titulo + '\'' +
                 ", fechaPublicacion=" + fechaPublicacion +
-                ", autores=" + autores +
+                ", autores=" + autores.stream().map(Autor::getNombre).toList() +
                 '}';
     }
 
