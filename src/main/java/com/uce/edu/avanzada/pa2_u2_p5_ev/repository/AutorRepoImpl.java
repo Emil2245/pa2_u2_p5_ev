@@ -1,6 +1,7 @@
 package com.uce.edu.avanzada.pa2_u2_p5_ev.repository;
 
 import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Autor;
+import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Autor2;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -23,6 +24,12 @@ public class AutorRepoImpl implements IAutorRepository {
     }
 
     @Override
+    public void insert(Autor2 autor2) {
+        this.entityManager.persist(autor2);
+
+    }
+
+    @Override
     public void delete(Integer id) {
         Autor autor = this.select(id);
         this.entityManager.remove(autor);
@@ -31,5 +38,10 @@ public class AutorRepoImpl implements IAutorRepository {
     @Override
     public void update(Autor autor) {
         this.entityManager.merge(autor);
+    }
+
+    @Override
+    public void update(Autor2 autor2) {
+        this.entityManager.merge(autor2);
     }
 }

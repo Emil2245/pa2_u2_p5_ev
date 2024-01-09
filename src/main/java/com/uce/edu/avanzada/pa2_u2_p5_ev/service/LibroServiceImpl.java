@@ -2,6 +2,7 @@ package com.uce.edu.avanzada.pa2_u2_p5_ev.service;
 
 import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.ILibroRepository;
 import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Libro;
+import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Libro2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,12 @@ import org.springframework.stereotype.Service;
 public class LibroServiceImpl implements ILibroService{
     @Autowired
     private ILibroRepository iLibroRepository;
+
+    @Override
+    public Libro buscarPorNombre(String nombre) {
+        return this.iLibroRepository.seleccionarPorNombre(nombre);
+    }
+
     @Override
     public Libro buscar(Integer id) {
         return (Libro) this.iLibroRepository.seleccionar(id);
@@ -17,6 +24,12 @@ public class LibroServiceImpl implements ILibroService{
     @Override
     public void guardar(Libro libro) {
         this.iLibroRepository.insertar(libro);
+    }
+
+    @Override
+    public void guardar(Libro2 libro2) {
+        this.iLibroRepository.insertar(libro2);
+
     }
 
     @Override
