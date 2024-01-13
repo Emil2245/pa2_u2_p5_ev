@@ -7,6 +7,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "libro")
+@NamedQuery(name = "Libro.queryBuscarPorTitulo", query = "SELECT l FROM Libro l WHERE l.titulo = :titulo")
+@NamedQuery(name = "Libro.queryBuscarPorFechaNamed", query = "SELECT l FROM Libro l WHERE l.fechaPublicacion >= :fecha")
 public class Libro {
     @Id
     @SequenceGenerator(name = "generator_libro", allocationSize = 1,sequenceName = "seq_libro_id")

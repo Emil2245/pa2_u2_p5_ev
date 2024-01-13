@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Repository
 @Transactional
 public class LibroRepoImpl implements ILibroRepository {
@@ -24,8 +27,48 @@ public class LibroRepoImpl implements ILibroRepository {
     }
 
     @Override
+    public Libro seleccionarPorTitulo(String titulo) {
+        TypedQuery<Libro> typedQuery=this.entityManager.createQuery("SELECT l FROM Libro l WHERE l.titulo = :varibleTitulo", Libro.class);
+        typedQuery.setParameter("varibleTitulo",titulo);
+        return typedQuery.getSingleResult();
+    }
+
+    @Override
+    public List<Libro> seleccionarPorFechaNamed(LocalDateTime fechaPublicacion) {
+        TypedQuery<Libro> query = this.entityManager.createNamedQuery("Libro.queryBuscarPorFechaNamed",Libro.class);
+
+        query.setParameter("fecha", fechaPublicacion);
+        return query.getResultList();
+    }
+
+
+    @Override
+    public Libro seleccionarPorTituloNamed(String titulo) {
+        TypedQuery<Libro> typedQuery = this.entityManager.createNamedQuery("Libro.queryBuscarPorTitulo", Libro.class);
+        typedQuery.setParameter("titulo",titulo);
+
+        return typedQuery.getSingleResult();
+    }
+
+    @Override
     public Libro seleccionar(Integer id) {
-        return (Libro) this.entityManager.find(Libro.class, id);
+        return this.entityManager.find(Libro.class, id);
+    }
+
+    @Override
+    public List<Libro> seleccionarPorFechaPublicacion(LocalDateTime fechaPublicacion) {
+        Query query =
+                this.entityManager.createQuery("SELECT l FROM Libro l WHERE l.fechaPublicacion >= :fecha");
+        query.setParameter("fecha", fechaPublicacion);
+        return (List<Libro>) query.getResultList();
+    }
+
+    @Override
+    public List<Libro> seleccionarPorFecha(LocalDateTime fechaPublicacion) {
+        TypedQuery<Libro> typedQuery =
+                this.entityManager.createQuery("SELECT l FROM Libro l WHERE l.fechaPublicacion >= :fecha", Libro.class);
+        typedQuery.setParameter("fecha", fechaPublicacion);
+        return typedQuery.getResultList();
     }
 
     @Override
