@@ -54,4 +54,14 @@ public class Empleado {
     public void setFechaIngreso(LocalDateTime fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
+
+    @Override
+    public String toString() {
+        return "Empleado{" +
+                "id=" + id +
+                ", salario=" + salario +
+                ", fechaIngreso=" + fechaIngreso +
+                ", ciudadano=" + ciudadano.getCedula() +
+                '}';
+    }
 }

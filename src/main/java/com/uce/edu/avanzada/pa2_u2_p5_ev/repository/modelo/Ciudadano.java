@@ -12,6 +12,8 @@ public class Ciudadano {
     private Integer id;
     @Column(name = "ciud_nombre")
     private String nombre;
+    @Column(name = "ciud_cedula")
+    private String cedula;
     @Column(name = "ciud_apellido")
     private String apellido;
     @OneToOne(mappedBy = "ciudadano",cascade = CascadeType.ALL)//nombre del atributo de la otra tabla
@@ -20,6 +22,15 @@ public class Ciudadano {
 
 
     //toString, settters y getters
+
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
 
     public Empleado getEmpleado() {
         return empleado;
@@ -34,7 +45,9 @@ public class Ciudadano {
         return "Ciudadano{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
+                ", cedula='" + cedula + '\'' +
                 ", apellido='" + apellido + '\'' +
+                ", empleado=" + empleado.getId() +
                 '}';
     }
 
