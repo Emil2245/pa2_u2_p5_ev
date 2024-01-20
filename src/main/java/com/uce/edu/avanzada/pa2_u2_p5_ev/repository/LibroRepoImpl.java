@@ -17,7 +17,6 @@ public class LibroRepoImpl implements ILibroRepository {
 
     @Override
     public Libro seleccionarPorNombre(String nombre) {
-
         //SELECT * FROM libro l WHERE l.libr_titulo = ?
         //SELECT l FROM Libro l WHERE l.titulo = :varibleTitulo
         Query query =

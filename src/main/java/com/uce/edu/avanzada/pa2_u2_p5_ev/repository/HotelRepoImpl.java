@@ -1,10 +1,15 @@
 package com.uce.edu.avanzada.pa2_u2_p5_ev.repository;
 
+import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Habitacion;
 import com.uce.edu.avanzada.pa2_u2_p5_ev.repository.modelo.Hotel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @Transactional
@@ -15,7 +20,86 @@ public class HotelRepoImpl implements IHotelRepository {
     @Override
     public Hotel seleccionar(Integer id) {
         return this.entityManager.find(Hotel.class, id);
+    }
 
+    @Override
+    public List<Habitacion> selectAllRooms(String nombre) {
+        TypedQuery<Habitacion> query =
+                this.entityManager.createQuery("SELECT l FROM Habitacion l WHERE l.hotel.nombre = :varibleTitulo", Habitacion.class);
+        query.setParameter("varibleTitulo", nombre);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Habitacion> selectRoomsInBetween(String nombre, Integer min, Integer max) {
+        TypedQuery<Habitacion> query =
+                this.entityManager.createQuery("SELECT l FROM Habitacion l WHERE l.hotel.nombre = :varible and l.numero between :min and :max", Habitacion.class);
+        query.setParameter("varible", nombre);
+        query.setParameter("min", min);
+        query.setParameter("max", max);
+        return query.getResultList();
+    }
+
+    @Override
+    public Hotel selectHotelByName(String name) {
+        TypedQuery<Hotel> query =
+                this.entityManager.createQuery("SELECT l FROM Hotel l WHERE l.nombre = :varible", Hotel.class);
+        query.setParameter("varible", name);
+        return query.getResultList().get(0);
+    }
+
+    @Override
+    public Hotel selectHotelPorDireccion(String direccion) {
+        TypedQuery<Hotel> query =
+                this.entityManager.createQuery("SELECT l FROM Hotel l WHERE l.direccion = :direccion", Hotel.class);
+        query.setParameter("direccion", direccion);
+        return query.getResultList().get(0);
+    }
+
+    @Override
+    public List<Hotel> selectHotelesPorNumHabitaciones(Integer num) {
+        TypedQuery<Hotel> query =
+                this.entityManager.createQuery("SELECT l FROM Hotel l WHERE SIZE(l.habitaciones) >= :num", Hotel.class);
+        query.setParameter("num", num);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Hotel> selectHotelConPiscina() {
+        Query query =
+                this.entityManager.createNativeQuery("SELECT * FROM hotel h where h.hote_tiene_piscina = TRUE", Hotel.class);
+        return (List<Hotel>) query.getResultList();
+    }
+
+    @Override
+    public List<Hotel> selectHotelSinPiscina() {
+        Query query =
+                this.entityManager.createNativeQuery("SELECT * FROM hotel h where h.hote_tiene_piscina = FALSE", Hotel.class);
+        return (List<Hotel>) query.getResultList();
+    }
+
+    @Override
+    public List<Habitacion> selectHabitacionesConVistaPiscina(String name) {
+        Query query =
+                this.entityManager.createNativeQuery("SELECT * FROM habitacion h WHERE h.habi_tiene_vista_piscina = TRUE AND h.habi_id_hotel = (SELECT hote_id FROM public.hotel WHERE hote_nombre = :name);", Habitacion.class);
+        query.setParameter("name", name);
+        return (List<Habitacion>) query.getResultList();
+    }
+
+    @Override
+    public List<Habitacion> selectHabitacionesSinVistaPiscina(String name) {
+        Query query =
+                this.entityManager.createNativeQuery("SELECT * FROM habitacion h WHERE h.habi_tiene_vista_piscina = FALSE AND h.habi_id_hotel = (SELECT hote_id FROM public.hotel WHERE hote_nombre = :name);", Habitacion.class);
+        query.setParameter("name", name);
+        return (List<Habitacion>) query.getResultList();
+    }
+
+    @Override
+    public Integer countHabitacionesPorHotel(String name) {
+        Query query =
+                this.entityManager.createNativeQuery("SELECT COUNT(*) FROM habitacion h WHERE h.habi_id_hotel=(select l.hote_id from hotel l where l.hote_nombre= :name) ", Integer.class);
+        query.setParameter("name", name);
+        return (Integer) query.getSingleResult();
     }
 
     @Override

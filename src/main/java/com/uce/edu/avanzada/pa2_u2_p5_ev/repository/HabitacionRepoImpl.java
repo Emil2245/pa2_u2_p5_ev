@@ -26,7 +26,6 @@ public class HabitacionRepoImpl implements IHabitacionRepository {
     @Override
     public void actualizar(Habitacion habitacion) {
         this.entityManager.merge(habitacion);
-
     }
 
     @Override

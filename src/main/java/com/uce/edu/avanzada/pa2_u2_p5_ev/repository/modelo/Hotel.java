@@ -16,18 +16,20 @@ public class Hotel {
     private  String nombre;
     @Column (name = "hote_direccion")
     private String direccion;
+    @Column (name = "hote_tiene_piscina")
+    private Boolean tienePiscina;
     @Column(name = "hote_habitaciones")
-    @OneToMany (mappedBy = "hotel", cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Habitacion> habitaciones;
 
-    //get set toString
     @Override
     public String toString() {
         return "Hotel{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", direccion='" + direccion + '\'' +
-                ", habitaciones=" + habitaciones +
+                ", tienePiscina=" + tienePiscina +
+                ", habitaciones=" + habitaciones.stream().count() +
                 '}';
     }
 
@@ -61,5 +63,13 @@ public class Hotel {
 
     public void setHabitaciones(List<Habitacion> habitaciones) {
         this.habitaciones = habitaciones;
+    }
+
+    public Boolean getTienePiscina() {
+        return tienePiscina;
+    }
+
+    public void setTienePiscina(Boolean tienePiscina) {
+        this.tienePiscina = tienePiscina;
     }
 }

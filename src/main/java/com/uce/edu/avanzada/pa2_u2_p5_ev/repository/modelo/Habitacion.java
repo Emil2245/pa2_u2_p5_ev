@@ -14,18 +14,20 @@ public class Habitacion {
     private String numero;
     @Column (name = "habi_clase")
     private String clase;
+    @Column (name = "habi_tiene_vista_piscina")
+    private Boolean tieneVistaPiscina;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "habi_id_hotel")
     private Hotel hotel;
 
-    //get set toString
     @Override
     public String toString() {
         return "Habitacion{" +
                 "id=" + id +
                 ", numero='" + numero + '\'' +
                 ", clase='" + clase + '\'' +
-                ", hotel=" + hotel +
+                ", tieneVistaPiscina=" + tieneVistaPiscina +
+                ", hotel=" + hotel.getNombre() +
                 '}';
     }
 
@@ -59,5 +61,13 @@ public class Habitacion {
 
     public void setClase(String clase) {
         this.clase = clase;
+    }
+
+    public Boolean getTieneVistaPiscina() {
+        return tieneVistaPiscina;
+    }
+
+    public void setTieneVistaPiscina(Boolean tieneVistaPiscina) {
+        this.tieneVistaPiscina = tieneVistaPiscina;
     }
 }
