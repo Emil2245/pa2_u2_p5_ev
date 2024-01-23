@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
@@ -100,6 +101,80 @@ public class HotelRepoImpl implements IHotelRepository {
                 this.entityManager.createNativeQuery("SELECT COUNT(*) FROM habitacion h WHERE h.habi_id_hotel=(select l.hote_id from hotel l where l.hote_nombre= :name) ", Integer.class);
         query.setParameter("name", name);
         return (Integer) query.getSingleResult();
+    }
+
+    @Override
+    public List<Hotel> selectHotelesPorNombre(String nombre) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Hotel> criteriaQuery = criteriaBuilder.createQuery(Hotel.class);
+
+        Root<Hotel> root = criteriaQuery.from(Hotel.class);
+        Predicate predicate = criteriaBuilder.equal(root.get("nombre"), nombre);
+
+        criteriaQuery.where(predicate);
+
+        TypedQuery<Hotel> typedQuery = entityManager.createQuery(criteriaQuery);
+        return typedQuery.getResultList();
+    }
+
+    @Override
+    public List<Hotel> selectHotelesConPiscina() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Hotel> criteriaQuery = criteriaBuilder.createQuery(Hotel.class);
+
+        Root<Hotel> root = criteriaQuery.from(Hotel.class);
+        Predicate predicate = criteriaBuilder.isTrue(root.get("tienePiscina"));
+
+        criteriaQuery.where(predicate);
+
+        TypedQuery<Hotel> typedQuery = entityManager.createQuery(criteriaQuery);
+        return typedQuery.getResultList();
+    }
+
+    @Override
+    public List<Habitacion> selectHabitacionesConVistaPiscina() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Habitacion> criteriaQuery = criteriaBuilder.createQuery(Habitacion.class);
+
+        Root<Habitacion> root = criteriaQuery.from(Habitacion.class);
+        Predicate predicate = criteriaBuilder.isTrue(root.get("tieneVistaPiscina"));
+
+        criteriaQuery.where(predicate);
+
+        TypedQuery<Habitacion> typedQuery = entityManager.createQuery(criteriaQuery);
+        return typedQuery.getResultList();
+    }
+
+    @Override
+    public List<Hotel> selectHotelesConHabitacionesVistaPiscina() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Hotel> criteriaQuery = criteriaBuilder.createQuery(Hotel.class);
+
+        Root<Hotel> root = criteriaQuery.from(Hotel.class);
+        Join<Hotel, Habitacion> habitacionesJoin = root.join("habitaciones");
+
+        Predicate predicate = criteriaBuilder.isTrue(habitacionesJoin.get("tieneVistaPiscina"));
+
+        criteriaQuery.select(root).distinct(true).where(predicate);
+
+        TypedQuery<Hotel> typedQuery = entityManager.createQuery(criteriaQuery);
+        return typedQuery.getResultList();
+    }
+
+    @Override
+    public List<Habitacion> selectHabitacionesEnHotelesPorDireccion(String direccion) {
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<Habitacion> criteriaQuery = criteriaBuilder.createQuery(Habitacion.class);
+
+            Root<Habitacion> root = criteriaQuery.from(Habitacion.class);
+            Join<Habitacion, Hotel> hotelJoin = root.join("hotel");
+
+            Predicate predicate = criteriaBuilder.equal(hotelJoin.get("direccion"), direccion);
+
+            criteriaQuery.select(root).where(predicate);
+
+            TypedQuery<Habitacion> typedQuery = entityManager.createQuery(criteriaQuery);
+            return typedQuery.getResultList();
     }
 
     @Override

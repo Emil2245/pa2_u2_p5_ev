@@ -17,6 +17,11 @@ public interface IHotelService {
     List<Habitacion> buscarHabitacionesConVistaPiscina(String name);
     List<Habitacion> buscarHabitacionesSinVistaPiscina(String name);
     Integer contarHabitacionesPorHotel(String name);
+    List<Hotel> buscarHotelesPorNombre(String nombre);
+    List<Hotel> buscarHotelesConPiscina();
+    List<Habitacion> buscarHabitacionesConVistaPiscina();
+    List<Hotel> buscarHotelesConHabitacionesVistaPiscina();
+    List<Habitacion> buscarHabitacionesEnHotelesPorDireccion(String direccion);
     void guardar(Hotel hotel);
     void actualizar (Hotel hotel);
     void eliminar(Integer id);

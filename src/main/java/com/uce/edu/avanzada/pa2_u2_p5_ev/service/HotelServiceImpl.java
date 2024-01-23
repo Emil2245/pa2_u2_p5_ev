@@ -68,6 +68,31 @@ public class HotelServiceImpl implements IHotelService{
     }
 
     @Override
+    public List<Hotel> buscarHotelesPorNombre(String nombre) {
+        return this.iHotelRepository.selectHotelesPorNombre(nombre);
+    }
+
+    @Override
+    public List<Hotel> buscarHotelesConPiscina() {
+        return this.iHotelRepository.selectHotelesConPiscina();
+    }
+
+    @Override
+    public List<Habitacion> buscarHabitacionesConVistaPiscina() {
+        return this.iHotelRepository.selectHabitacionesConVistaPiscina();
+    }
+
+    @Override
+    public List<Hotel> buscarHotelesConHabitacionesVistaPiscina() {
+        return this.iHotelRepository.selectHotelesConHabitacionesVistaPiscina();
+    }
+
+    @Override
+    public List<Habitacion> buscarHabitacionesEnHotelesPorDireccion(String direccion) {
+        return this.iHotelRepository.selectHabitacionesEnHotelesPorDireccion(direccion);
+    }
+
+    @Override
     public void guardar(Hotel hotel) {
         this.iHotelRepository.insertar(hotel);
     }
