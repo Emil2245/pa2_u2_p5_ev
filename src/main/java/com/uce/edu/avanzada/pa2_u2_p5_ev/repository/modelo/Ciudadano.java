@@ -47,7 +47,6 @@ public class Ciudadano {
                 ", nombre='" + nombre + '\'' +
                 ", cedula='" + cedula + '\'' +
                 ", apellido='" + apellido + '\'' +
-                ", empleado=" + empleado.getId() +
                 '}';
     }
 
